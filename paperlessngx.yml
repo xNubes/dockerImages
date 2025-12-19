@@ -1,37 +1,46 @@
----
-type: 1
-title: paperless
-name: paperlessngx
-description: This is a description.
-logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/transmission-icon.png
-image: paperlessngx/paperless-ngx:latest
-note: This is a note
-categories:
-- Other
-- Tools
-platform: linux
-restart_policy: unless-stopped
-ports:
-- 9091:9091/tcp
-- 9090:9090/tcp
-network_mode: bridge
-volumes:
-- data: /usr/src/paperless/data
-- media: /usr/src/paperless/media
-- export: /usr/src/paperless/export
-- consume: /usr/src/paperless/consume
-sysctls:
-- net.ipv6.conf.all.disable_ipv6: '0'
-cap_add:
-- NET_ADMIN
-env:
-- name: PUID
-  label: PUID
-  default: '1000'
-- name: PGID
-  label: PGID
-  default: '1000'
-- name: EnvWithDescription
-  label: EnvWithDescription
-  description: This is a description
-  default: default
+[
+  {
+    "type": 1,
+    "title": "Paperless-ngx",
+    "name": "paperlessngx",
+    "description": "Paperless document management",
+    "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/transmission-icon.png",
+    "image": "paperlessngx/paperless-ngx:latest",
+    "platform": "linux",
+    "categories": ["Other", "Tools"],
+    "restart_policy": "unless-stopped",
+    "ports": [
+      "8000:8000/tcp"
+    ],
+    "volumes": [
+      {
+        "container": "/usr/src/paperless/data",
+        "bind": "!data"
+      },
+      {
+        "container": "/usr/src/paperless/media",
+        "bind": "!media"
+      },
+      {
+        "container": "/usr/src/paperless/export",
+        "bind": "!export"
+      },
+      {
+        "container": "/usr/src/paperless/consume",
+        "bind": "!consume"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "label": "PUID",
+        "default": "1000"
+      },
+      {
+        "name": "PGID",
+        "label": "PGID",
+        "default": "1000"
+      }
+    ]
+  }
+]
