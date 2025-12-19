@@ -7,7 +7,10 @@
     "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/transmission-icon.png",
     "image": "paperlessngx/paperless-ngx:latest",
     "platform": "linux",
-    "categories": ["Other", "Tools"],
+    "categories": [
+      "Other",
+      "Tools"
+    ],
     "restart_policy": "unless-stopped",
     "ports": [
       "8000:8000/tcp"
