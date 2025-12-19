@@ -1,49 +1,60 @@
-[
-  {
+  [
+    {
+      "type": 1,
+      "title": "Paperless-ngx",
+      "name": "paperlessngx",
+      "description": "Paperless document management",
+      "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/transmission-icon.png",
+      "image": "paperlessngx/paperless-ngx:latest",
+      "platform": "linux",
+      "categories": [
+        "Other",
+        "Tools"
+      ],
+      "restart_policy": "unless-stopped",
+      "ports": [
+        "8000:8000/tcp"
+      ],
+      "volumes": [
+        {
+          "container": "/usr/src/paperless/data",
+          "bind": "!data"
+        },
+        {
+          "container": "/usr/src/paperless/media",
+          "bind": "!media"
+        },
+        {
+          "container": "/usr/src/paperless/export",
+          "bind": "!export"
+        },
+        {
+          "container": "/usr/src/paperless/consume",
+          "bind": "!consume"
+        }
+      ],
+  "env": [
+    { "name": "PUID", "label": "PUID", "default": "1000" },
+    { "name": "PGID", "label": "PGID", "default": "1000" },
+    { "name": "PAPERLESS_REDIS", "label": "PAPERLESS_REDIS", "default": "redis://paperless-redis:6379" }
+  ]
+    },
+    {
     "type": 1,
-    "title": "Paperless-ngx",
-    "name": "paperlessngx",
-    "description": "Paperless document management",
-    "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/transmission-icon.png",
-    "image": "paperlessngx/paperless-ngx:latest",
+    "title": "Paperless-ngx Redis",
+    "name": "paperless-redis",
+    "description": "Redis for Paperless-ngx",
+    "image": "redis:7",
     "platform": "linux",
-    "categories": [
-      "Other",
-      "Tools"
-    ],
     "restart_policy": "unless-stopped",
-    "ports": [
-      "8000:8000/tcp"
-    ],
+    "categories": ["Database"],
+    "ports": [],
     "volumes": [
       {
-        "container": "/usr/src/paperless/data",
-        "bind": "!data"
-      },
-      {
-        "container": "/usr/src/paperless/media",
-        "bind": "!media"
-      },
-      {
-        "container": "/usr/src/paperless/export",
-        "bind": "!export"
-      },
-      {
-        "container": "/usr/src/paperless/consume",
-        "bind": "!consume"
-      }
-    ],
-    "env": [
-      {
-        "name": "PUID",
-        "label": "PUID",
-        "default": "1000"
-      },
-      {
-        "name": "PGID",
-        "label": "PGID",
-        "default": "1000"
+        "container": "/data",
+        "bind": "!redisdata"
       }
     ]
   }
-]
+  ]
+
